@@ -1,6 +1,14 @@
 FirstRoutes::Application.routes.draw do
 
-  resources :users
+  resources :users, only: [:index, :show, :create, :destroy, :update]
+
+  resources :users do
+    resources :contacts, :only => :index
+  end
+
+  resources :contacts, only: [:show, :create, :destroy, :update]
+
+
 
   # get 'users/' => 'users#index'
 #   post 'users/' => 'users#create'
