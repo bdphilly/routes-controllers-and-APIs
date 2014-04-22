@@ -23,6 +23,7 @@ Contact.create(name: "Fred Flintstone", email: "flintstone@aol.com", user_id: 3)
 
 ContactShare.create(user_id: 2, contact_id: 1)
 ContactShare.create(user_id: 2, contact_id: 4)
+
 # ContactShare.create(user_id: 1, contact_id: 4)
 # ContactShare.create(user_id: 1, contact_id: 4)
 

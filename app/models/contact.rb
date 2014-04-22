@@ -20,6 +20,8 @@ class Contact < ActiveRecord::Base
     :through => :contact_shares,
     :source => :user)
 
+  has_many :notes, as: :notable
+
   def self.contacts_for_user_id(user_id)
     contact_results = Contact.select("*").joins(<<-SQL)
     LEFT OUTER JOIN
@@ -29,7 +31,6 @@ class Contact < ActiveRecord::Base
     WHERE
     contacts.user_id = #{user_id} OR contact_shares.user_id = #{user_id}
     SQL
-
   end
 
 end
