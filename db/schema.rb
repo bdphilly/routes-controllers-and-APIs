@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140422233640) do
+ActiveRecord::Schema.define(version: 20140423003317) do
 
   create_table "contact_shares", force: true do |t|
-    t.integer  "contact_id", null: false
-    t.integer  "user_id",    null: false
+    t.integer  "contact_id",                 null: false
+    t.integer  "user_id",                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "favorite",   default: false
   end
 
   add_index "contact_shares", ["contact_id", "user_id"], name: "index_contact_shares_on_contact_id_and_user_id", unique: true
@@ -25,14 +26,29 @@ ActiveRecord::Schema.define(version: 20140422233640) do
   add_index "contact_shares", ["user_id"], name: "index_contact_shares_on_user_id"
 
   create_table "contacts", force: true do |t|
-    t.string   "name",       null: false
-    t.string   "email",      null: false
-    t.integer  "user_id",    null: false
+    t.string   "name",                       null: false
+    t.string   "email",                      null: false
+    t.integer  "user_id",                    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "favorite",   default: false
+  end
+
+  add_index "contacts", ["user_id"], name: "index_contacts_on_user_id"
+
+  create_table "group_memberships", force: true do |t|
+    t.integer  "contact_id"
+    t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "contacts", ["user_id"], name: "index_contacts_on_user_id"
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "notes", force: true do |t|
     t.text     "body"

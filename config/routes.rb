@@ -4,11 +4,20 @@ FirstRoutes::Application.routes.draw do
 
   resources :users do
     resources :contacts, :only => :index
+    resources :groups, :only => :index
   end
 
   resources :contacts, only: [:show, :create, :destroy, :update]
 
+  resources :groups, only: [:show, :create, :destroy]
 
+  # get 'users/:id/favorites' => 'users#favorites'
+
+  resources :users do
+    member do
+      get 'favorites'
+    end
+  end
 
   # get 'users/' => 'users#index'
 #   post 'users/' => 'users#create'

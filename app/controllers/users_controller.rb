@@ -32,6 +32,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def favorites
+    user = User.find(params[:id])
+    render :json => user.favorites.map { |contact| contact.as_json }
+  end
+
   private
 
     def user_params
